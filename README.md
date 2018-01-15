@@ -2,14 +2,15 @@
 * OpenCV version - 2.4.13.3<br>
 * Development environment - Delphi 2010-10.2<br>
 
-Change Remark 15.01.2018
- Michael Koecher
- Fork of OpenCV for Lazarus
- Install (tested Lazarus V1.8.0 x86):
- Open, compile nad install with Lazarus IDE
- source\component\Lazarus\dclcommonopencv230.lpk
- source\component\Lazarus\dclvclopencv230.lpk
- 
+#Change Remark 15.01.2018
+ Michael Koecher<br>
+ Fork of OpenCV for Lazarus<br>
+ Install (tested Lazarus V1.8.0 x86):<br>
+ Open, compile and install with Lazarus IDE<br>
+ source\component\Lazarus\dclcommonopencv230.lpk<br>
+ source\component\Lazarus\dclvclopencv230.lpk<br>
+<br>
+<br> 
 
 <b>Contributors:</b>
 
