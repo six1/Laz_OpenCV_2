@@ -8,9 +8,9 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <IncludeFiles Value="..\.."/>
-        <OtherUnitFiles Value=".."/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <IncludeFiles Value="..;..\..;..\..\..\resource\facedetectxml"/>
+        <OtherUnitFiles Value="..;..\.."/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files Count="1">
