@@ -10,7 +10,9 @@
  source\dclcommonopencv230.lpk<br>
  source\dclvclopencv230.lpk<br>
 <br>
-15.01.2018  initial fork with problems in ocvView Component
+15.01.2018 initial fork with problems in ocvView Component
+20.01.2018 Update Lazarus Components source/dclcommonopencv230.lpk source\dclvclopencv230.lpk
+20.01.2018 Update Lazarus Sample samples/Lazarus Sample/
 <br>
 <br> 
 
