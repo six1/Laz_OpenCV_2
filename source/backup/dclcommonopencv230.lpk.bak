@@ -8,8 +8,8 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <IncludeFiles Value="..;..\.."/>
-        <OtherUnitFiles Value=".;..;..\.."/>
+        <IncludeFiles Value=".."/>
+        <OtherUnitFiles Value=".."/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <Linking>
@@ -25,8 +25,9 @@
     </CompilerOptions>
     <Files Count="1">
       <Item1>
-        <Filename Value="..\ocv.comp.Register.pas"/>
+        <Filename Value="ocv.comp.Register.pas"/>
         <HasRegisterProc Value="True"/>
+        <AddToUsesPkgSection Value="False"/>
         <UnitName Value="ocv.comp.Register"/>
       </Item1>
     </Files>

@@ -2,32 +2,22 @@
 <CONFIG>
   <Package Version="4">
     <PathDelim Value="\"/>
-    <Name Value="dclCommonOpenCV230"/>
+    <Name Value="dclVCLOpenCV230"/>
     <Type Value="RunAndDesignTime"/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <IncludeFiles Value="..;..\.."/>
-        <OtherUnitFiles Value=".;..;..\.."/>
+        <IncludeFiles Value=".."/>
+        <OtherUnitFiles Value=".."/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
-      <Linking>
-        <Debugging>
-          <UseExternalDbgSyms Value="True"/>
-        </Debugging>
-      </Linking>
-      <Other>
-        <Verbosity>
-          <ShowDebugInfo Value="True"/>
-        </Verbosity>
-      </Other>
     </CompilerOptions>
     <Files Count="1">
       <Item1>
-        <Filename Value="..\ocv.comp.Register.pas"/>
+        <Filename Value="ocv.comp.RegisterVCL.pas"/>
         <HasRegisterProc Value="True"/>
-        <UnitName Value="ocv.comp.Register"/>
+        <UnitName Value="ocv.comp.RegisterVCL"/>
       </Item1>
     </Files>
     <RequiredPkgs Count="3">

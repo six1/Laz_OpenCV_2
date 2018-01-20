@@ -78,11 +78,9 @@ begin
     { } TocvLogicSOperation]);
 end;
 
-{$IFDEF FPC}
 
 initialization
 
 {$I Resource\ocv.lrs}
-{$ENDIF FPC}
 
 end.

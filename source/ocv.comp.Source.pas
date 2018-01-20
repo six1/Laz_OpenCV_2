@@ -43,8 +43,8 @@ uses
   ocv.core.types_c,
   ocv.highgui_c,
   ocv.comp.Types,
-  ocv.lock
-, uResourcePaths
+  ocv.lock,
+  uResourcePaths
 ;
 
 type

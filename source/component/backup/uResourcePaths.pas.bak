@@ -1,0 +1,35 @@
+unit uResourcePaths;
+
+{$WRITEABLECONST ON}
+
+interface
+
+Const
+  cResourceMedia = 'resource\media\';
+  cResourceFaces = 'resource\faces\';
+  cResourceFaceDetect = 'resource\facedetectxml\';
+  cResourceResultDefault = 'resource\result\';
+
+  {$INCLUDEPATH ..\..\resource\facedetectxml\}
+  {$R ..\..\resource\facedetectxml\haarcascade.rc}
+type
+  {$I ..\..\resource\facedetectxml\ocvHaarCascadeType.inc}
+  {$I ..\..\resource\facedetectxml\haarcascade.inc}
+
+function cResourceResult: AnsiString;
+
+implementation
+
+uses
+  SysUtils;
+
+
+function cResourceResult: AnsiString;
+begin
+  if DirectoryExists(cResourceResultDefault) then
+    Result := cResourceResultDefault
+  else
+    Result := '';
+end;
+
+end.

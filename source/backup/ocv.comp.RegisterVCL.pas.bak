@@ -24,24 +24,20 @@
   rights and limitations under the License.
   *******************************************************************
 *)
-{$IFNDEF CLR}
 {$I OpenCV.inc}
 unit ocv.comp.RegisterVCL;
-{$ENDIF}
 
 interface
 
-procedure Register;
-
-implementation
-
-
 uses
-{$IFDEF FPC}
   PropEdits, ComponentEditors, Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ocv.comp.View,
   ocv.lib
   ;
+
+procedure Register;
+
+implementation
 
 
 procedure Register;
@@ -49,7 +45,6 @@ begin
   RegisterComponents('OpenCV', [TocvView]);
 end;
 
-{$IFDEF FPC}
 
 initialization
 

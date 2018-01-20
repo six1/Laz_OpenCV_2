@@ -156,12 +156,12 @@ Var
 {$ENDIF}
 
 Type
-  (* int (*pt2Func)(int argc, char *argv[]) *)
+  (* int ( *pt2Func)(int argc, char *argv[]) *)
   TArgvArray = array [0 .. 0] of pCvChar;
   pArgvArray = ^TArgvArray;
   Tpt2Func = function(argc: Integer; argv: pArgvArray): Integer; cdecl;
   (*
-    CVAPI(int) cvStartLoop(int (*pt2Func)(int argc, char *argv[]), int argc, char* argv[]);
+    CVAPI(int) cvStartLoop(int ( *pt2Func)(int argc, char *argv[]), int argc, char* argv[]);
   *)
 {$IFDEF SAFELOADLIB}
 
