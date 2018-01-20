@@ -6,13 +6,14 @@
  Michael Koecher (six1 @ http://www.lazarusforum.de)<br>
  Fork of OpenCV for Lazarus<br>
  Install (tested Lazarus V1.8.0 x86):<br>
- Open, compile and install with Lazarus IDE<br>
+ a) Open, compile and install with Lazarus IDE<br>
+ b) copy all DLL from OpenCV_DLL_2413 to your Windows Directory<br><br>
  source\dclcommonopencv230.lpk<br>
  source\dclvclopencv230.lpk<br>
 <br>
-15.01.2018 initial fork with problems in ocvView Component
-20.01.2018 Update Lazarus Components source/dclcommonopencv230.lpk source\dclvclopencv230.lpk
-20.01.2018 Update Lazarus Sample samples/Lazarus Sample/
+15.01.2018 initial fork with problems in ocvView Component<br>
+20.01.2018 Update Lazarus Components source/dclcommonopencv230.lpk source\dclvclopencv230.lpk<br>
+20.01.2018 Update Lazarus Sample samples/Lazarus Sample/<br>
 <br>
 <br> 
 
