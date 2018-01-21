@@ -19,8 +19,8 @@ uses
   , ocv.imgproc_c
   , ocv.imgproc.types_c
   , ocv.objdetect_c
-  , uResourcePaths
-  , ocv.comp.View
+  , cv_AdaptiveSkinDetector
+  , uResourcePaths, ocv.comp.View
   , intfgraphics
   ;
 
@@ -128,7 +128,11 @@ const
 
 procedure TForm1.ComboBox1Change(Sender: TObject);
 begin
-  ClassifierCascade[(Sender as TCombobox).Tag].HaarClassifier := cvLoad( PChar(extractfilepath(application.ExeName)+ cResourceFaceDetect + CascadeRecourse[ TocvHaarCascadeType((Sender as TCombobox).ItemIndex-1)].FileName ));
+    // Load Classifier from File
+//  ClassifierCascade[(Sender as TCombobox).Tag].HaarClassifier := cvLoad( PChar(extractfilepath(application.ExeName)+ cResourceFaceDetect + CascadeRecourse[ TocvHaarCascadeType((Sender as TCombobox).ItemIndex-1)].FileName ));
+
+    // Load Classifier from res
+    ClassifierCascade[(Sender as TCombobox).Tag].HaarClassifier := ocvLoadHaarCascade( TocvHaarCascadeType((Sender as TCombobox).ItemIndex-1));
 end;
 
 procedure TForm1.ComboBox4Change(Sender: TObject);
