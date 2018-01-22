@@ -19,8 +19,7 @@
 <br>
 <br> 
 
-<b>Contributors:</b>
-
+<b>Contributors Delphi-OpenCV:</b>
  Laentir Valetov (email: laex@bk.ru)<br>
  Mikhail Grigorev (email: sleuthhound@gmail.com)
 
