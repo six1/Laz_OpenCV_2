@@ -30,6 +30,8 @@ type TWebCamSource = record
      ip:string;
      port:integer;
      url:string;
+     user:string;
+     pass:string;
 end;
 
 type
@@ -105,23 +107,21 @@ implementation
 { TForm1 }
 
 const
-   WebCamSource: array[0..14] of TWebCamSource =
+   WebCamSource: array[0..12] of TWebCamSource =
      (                                     // Protocol: 0=ippHTTP, 1=ippHTTPS, 2=ippRTSP
-      (name:'Local CAM';                      protocol:2; ip:'192.168.1.71';     port:80;  url:'ch0_0.264';),
-      (name:'Serbia, Vojvodina, Novi Pazar';  protocol:0; ip:'93.87.72.254';     port:8090; url:'mjpg/video.mjpg';),
-      (name:'Italy, Campania, Naples';        protocol:0; ip:'93.63.211.151';    port:80;   url:'mjpg/video.mjpg';),
-      (name:'Lisboa Lours';                   protocol:0; ip:'95.94.100.34';     port:85;   url:'mjpg/video.mjpg';),
-      (name:'Barber Shop England, Nottingham';protocol:0; ip:'81.149.36.95';     port:8082; url:'mjpg/video.mjpg';),
-      (name:'Wisconsin, Milwaukee';           protocol:0; ip:'192.206.48.49';    port:80;   url:'mjpg/video.mjpg';),
-      (name:'New Jersey, Hoboken';            protocol:0; ip:'108.30.103.113:83';port:80;   url:'mjpg/video.mjpg';),
-      (name:'Miami, Naples';                  protocol:0; ip:'173.165.209.17';   port:80;   url:'mjpg/video.mjpg';),
-      (name:'California, Rancho Cucamonga';   protocol:0; ip:'166.165.35.32';    port:80;   url:'mjpg/video.mjpg';),
-      (name:'Moscow';                         protocol:0; ip:'195.189.181.205';  port:80;   url:'mjpg/video.mjpg';),
-      (name:'Midtjylland, Tranbjerg Denmark'; protocol:0; ip:'62.242.189.219';   port:80;   url:'mjpg/video.mjpg';),
-      (name:'Milano';                         protocol:0; ip:'92.223.183.218';   port:8082; url:'mjpg/video.mjpg';),
-      (name:'Espirito Santo, Alegre Brasil';  protocol:0; ip:'138.118.33.201';   port:80;   url:'mjpg/video.mjpg';) ,
-      (name:'Luzern';                         protocol:0; ip:'cam.luzern.org';   port:80;   url:'axis-cgi/mjpg/video.cgi?action=stream.mjpeg';) ,
-      (name:'Japan';                          protocol:0; ip:'210.243.41.156';   port:80;   url:'axis-cgi/mjpg/video.cgi?camera=4';)
+      (name:'Local CAM';                      protocol:2; ip:'192.168.1.71';     port:80;   url:'ch0_0.264';       user:'';        pass:''  ),
+      (name:'Serbia, Vojvodina, Novi Pazar';  protocol:0; ip:'93.87.72.254';     port:8090; url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Italy, Campania, Naples';        protocol:0; ip:'93.63.211.151';    port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Lisboa Lours';                   protocol:0; ip:'95.94.100.34';     port:85;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Barber Shop England, Nottingham';protocol:0; ip:'81.149.36.95';     port:8082; url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Wisconsin, Milwaukee';           protocol:0; ip:'192.206.48.49';    port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'New Jersey, Hoboken';            protocol:0; ip:'108.30.103.113:83';port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Miami, Naples';                  protocol:0; ip:'173.165.209.17';   port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'California, Rancho Cucamonga';   protocol:0; ip:'166.165.35.32';    port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Moscow';                         protocol:0; ip:'195.189.181.205';  port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Midtjylland, Tranbjerg Denmark'; protocol:0; ip:'62.242.189.219';   port:80;   url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Milano';                         protocol:0; ip:'92.223.183.218';   port:8082; url:'mjpg/video.mjpg'; user:'';        pass:''),
+      (name:'Espirito Santo, Alegre Brasil';  protocol:0; ip:'138.118.33.201';   port:80;   url:'mjpg/video.mjpg'; user:'';        pass:'')
      );
 
 
@@ -147,6 +147,8 @@ begin
   ocvIPCamSource1.Port:=WebCamSource[ Combobox5.ItemIndex].port;
   ocvIPCamSource1.URI:=WebCamSource[ Combobox5.ItemIndex].url;
   ocvIPCamSource1.Protocol:=TocvIPProtocol( WebCamSource[Combobox5.ItemIndex].protocol);
+  ocvIPCamSource1.UserName:= WebCamSource[Combobox5.ItemIndex].user;
+  ocvIPCamSource1.Password:= WebCamSource[Combobox5.ItemIndex].pass;
   if Checkbox1.Checked and Radiobutton2.Checked then begin
     Timer1.enabled:=true;
   end;
@@ -178,7 +180,6 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
     OpenDialog1.InitialDir:=extractfilepath( application.ExeName);
-    ocvView1.Invalidate;
     ocvFileSource1.Enabled:=false;
     if OpenDialog1.Execute then begin
       ocvFileSource1.FileName:=OpenDialog1.FileName;
@@ -286,7 +287,10 @@ begin
   // image manipulations
   cp_IplImage:= IplImage.Clone;
   ocvView1.DrawImage( detect_and_draw2( cp_IplImage));
-  //Image1.Picture.bitmap.assign(  detect_and_draw2( cp_IplImage).AsBitmap );
+
+  // without ocvView you can output the bitmap to an Image:
+  // Image1.Picture.bitmap.assign(  detect_and_draw2( cp_IplImage).AsBitmap );
+
   Label1.visible:=false;
 end;
 

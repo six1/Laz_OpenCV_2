@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 737
   Top = 290
   Width = 948
-  Caption = 'Lazarus - Face Detection (OpenCV V2.x.x x86)'
+  Caption = 'Lazarus - Face Detection (OpenCV V2.x.x Lazarus V1.8.0)'
   ClientHeight = 737
   ClientWidth = 948
   Color = clWhite
