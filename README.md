@@ -26,5 +26,5 @@
 
 ## Requirements:
 * Lazarus V1.8.0
-```
+
 * Shared library FFMPEG 3.3.3 for Windows can be downloaded from http://ffmpeg.zeranoe.com/builds<br>
