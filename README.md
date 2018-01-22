@@ -1,4 +1,4 @@
-# Delphi-OpenCV
+# Lazarus<s>Delphi</s>-OpenCV
 * OpenCV version - 2.4.13.3<br>
 * Development environment - Delphi 2010-10.2<br>
 
