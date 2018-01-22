@@ -144,6 +144,8 @@ type
     property Center: Boolean read FCenter write FCenter default false;
     property Frames: TocvViewFrames Read FFrames Write FFrames;
     property Align;
+    property Anchors;
+    property Color default clsilver;
     property OnAfterPaint: TOnOcvAfterViewPaint read FOnAfterPaint write FOnAfterPaint;
     property OnBeforePaint: TOnOcvNotify read FOnBeforePaint write FOnBeforePaint;
     property OnEnter;
@@ -177,6 +179,9 @@ begin
   Proportional := false;
   Center := false;
   FFrames := TocvViewFrames.Create(Self, TocvViewFrame);
+  width:=100;
+  height:=100;
+  color:=clsilver;
 end;
 
 destructor TocvView.Destroy;
@@ -192,11 +197,17 @@ procedure TocvView.SetOpenCVVideoSource(const Value: IocvDataSource);
 begin
   if FocvVideoSource <> Value then
   begin
-    if Assigned(FocvVideoSource) then
-      FocvVideoSource.RemoveReceiver(Self);
+    try
+      if Assigned(FocvVideoSource) then
+        FocvVideoSource.RemoveReceiver(Self);
+    except
+    end;
     FocvVideoSource := Value;
-    if Assigned(FocvVideoSource) then
-      FocvVideoSource.AddReceiver(Self);
+    try
+      if Assigned(FocvVideoSource) then
+        FocvVideoSource.AddReceiver(Self);
+    except
+    end;
   end;
 end;
 
@@ -222,6 +233,7 @@ var
   ViewWidth, ViewHeight, CliWidth, CliHeight: integer;
   AspectRatio: Double;
 begin
+  if FImage.IpImage = nil then exit; //six1
   ViewWidth := FImage.IpImage^.Width;
   ViewHeight := FImage.IpImage^.Height;
   CliWidth := ClientWidth;
@@ -287,6 +299,7 @@ Var
   DC: HDC;
   lpPaint: TPaintStruct;
   i: integer;
+  rect:TRect;
 begin
   if (csDesigning in ComponentState) or (not isSourceEnabled) then
     inherited
@@ -294,14 +307,16 @@ begin
   begin
     if Assigned(FImage) then
     begin
-      Canvas.Lock;
-      DC := BeginPaint(Handle, lpPaint);
+      self.Canvas.Lock;
+      DC := BeginPaint(self.canvas.Handle, lpPaint);
       try
         Canvas.Handle := DC;
         try
+          FillRect(Message.dc, TRect.Create(0,0,self.width,self.Height), CreateSolidBrush (self.color)); //six1
+          rect:=PaintRect;
           if Assigned(OnBeforePaint) then
             OnBeforePaint(Self, FImage);
-          if ipDraw(DC, FImage.IpImage, PaintRect) then
+          if ipDraw(Message.DC, FImage.IpImage, rect) then   //six1
           begin
             for i := 0 to FFrames.Count - 1 do
               With (FFrames.Items[i] as TocvViewFrame) do
@@ -310,7 +325,7 @@ begin
 {$ELSE}
                 if Enabled and IsRectEmpty(DrawRect.AsRect) and Assigned(Image) then
 {$ENDIF}
-                  ipDraw(DC, Image.IpImage, DrawRect.AsRect);
+                  ipDraw(Message.DC, Image.IpImage, DrawRect.AsRect); //six1
             if Assigned(OnAfterPaint) then
               OnAfterPaint(Self, FImage);
           end;

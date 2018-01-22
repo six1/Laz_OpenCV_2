@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 667
-  Height = 672
+  Height = 737
   Top = 290
   Width = 948
   Caption = 'Lazarus - Face Detection (OpenCV V2.x.x x86)'
-  ClientHeight = 672
+  ClientHeight = 737
   ClientWidth = 948
   Color = clWhite
   Constraints.MinHeight = 640
@@ -18,25 +18,6 @@ object Form1: TForm1
   OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '1.8.0.6'
-  object Shape1: TShape
-    Left = 13
-    Height = 492
-    Top = 168
-    Width = 924
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    Brush.Color = clBlack
-    Pen.Width = 2
-  end
-  object Image1: TImage
-    Left = 15
-    Height = 488
-    Top = 170
-    Width = 919
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    Center = True
-    Proportional = True
-    Stretch = True
-  end
   object ComboBox1: TComboBox
     Left = 248
     Height = 27
@@ -287,6 +268,17 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
     Visible = False
+  end
+  object ocvView1: TocvView
+    Left = 13
+    Height = 568
+    Top = 160
+    Width = 924
+    Proportional = True
+    Center = True
+    Frames = <>
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clBlack
   end
   object ocvImageOperation1: TocvImageOperation
     OperationClassName = 'TocvNoneOperation'

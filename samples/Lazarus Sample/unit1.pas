@@ -53,7 +53,6 @@ type
     ComboBox3: TComboBox;
     ComboBox4: TComboBox;
     ComboBox5: TComboBox;
-    Image1: TImage;
     Label1: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -64,11 +63,11 @@ type
     ocvFileSource1: TocvFileSource;
     ocvImageOperation1: TocvImageOperation;
     ocvIPCamSource1: TocvIPCamSource;
+    ocvView1: TocvView;
     OpenDialog1: TOpenDialog;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;
-    Shape1: TShape;
     Shape2: TShape;
     Shape3: TShape;
     Shape4: TShape;
@@ -143,6 +142,7 @@ end;
 procedure TForm1.ComboBox5Change(Sender: TObject);
 begin
   ocvIPCamSource1.Enabled:=false;
+  application.ProcessMessages;
   ocvIPCamSource1.IP:=WebCamSource[ Combobox5.ItemIndex].ip;
   ocvIPCamSource1.Port:=WebCamSource[ Combobox5.ItemIndex].port;
   ocvIPCamSource1.URI:=WebCamSource[ Combobox5.ItemIndex].url;
@@ -178,7 +178,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
     OpenDialog1.InitialDir:=extractfilepath( application.ExeName);
-    Image1.Picture:=NIL;
+    ocvView1.Invalidate;
     ocvFileSource1.Enabled:=false;
     if OpenDialog1.Execute then begin
       ocvFileSource1.FileName:=OpenDialog1.FileName;
@@ -241,6 +241,7 @@ begin
  ocvIPCamSource1.URI:=WebCamSource[ Combobox5.ItemIndex].url;
  ocvIPCamSource1.Protocol:=TocvIPProtocol( WebCamSource[Combobox5.ItemIndex].protocol);
 
+ //ocvView1.VideoSource:=ocvImageOperation1;
 end;
 
 
@@ -284,7 +285,8 @@ var
 begin
   // image manipulations
   cp_IplImage:= IplImage.Clone;
-  Image1.Picture.bitmap.assign(  detect_and_draw2( cp_IplImage).AsBitmap );
+  ocvView1.DrawImage( detect_and_draw2( cp_IplImage));
+  //Image1.Picture.bitmap.assign(  detect_and_draw2( cp_IplImage).AsBitmap );
   Label1.visible:=false;
 end;
 
