@@ -19,7 +19,6 @@ uses
   , ocv.imgproc_c
   , ocv.imgproc.types_c
   , ocv.objdetect_c
-  , cv_AdaptiveSkinDetector
   , uResourcePaths, ocv.comp.View
   , intfgraphics
   ;
@@ -136,6 +135,7 @@ end;
 
 procedure TForm1.ComboBox4Change(Sender: TObject);
 begin
+  // maybe, it's better to cut VideoSource before?
   ocvImageOperation1.OperationClass := TocvImageOperationClass(ComboBox4.Items.Objects[ComboBox4.ItemIndex]);
 end;
 
@@ -242,7 +242,7 @@ begin
  ocvIPCamSource1.URI:=WebCamSource[ Combobox5.ItemIndex].url;
  ocvIPCamSource1.Protocol:=TocvIPProtocol( WebCamSource[Combobox5.ItemIndex].protocol);
 
- //ocvView1.VideoSource:=ocvImageOperation1;
+ ocvView1.VideoSource:=ocvImageOperation1;
 end;
 
 
@@ -277,7 +277,6 @@ begin
 end;
 
 
-
 procedure TForm1.ocvImageOperation1AfterEachOperation(PrevOperation, Operation,
   NextOperation: TObject; const IplImage: IocvImage;
   Var ContinueTransform: Boolean);
@@ -293,6 +292,7 @@ begin
 
   Label1.visible:=false;
 end;
+
 
 procedure TForm1.RadioButton1Click(Sender: TObject);
 begin
